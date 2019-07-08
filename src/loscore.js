@@ -112,15 +112,24 @@ class LoScore {
     // YOUR CODE HERE
     const result = func();
     return function() {
-      // if (func) {
-      //   func = null;
-      // }
       return result;
     };
   }
 
   memoize(func) {
     // YOUR CODE HERE
+    const cache = {};
+    return function(arg) {
+      const arrayKeys = Object.keys(cache);
+      console.log(arrayKeys);
+      console.log(arrayKeys.includes(arg));
+      if (arrayKeys.includes(JSON.stringify(arg))) {
+        console.log("inside if statement");
+        return cache[arg];
+      }
+      cache[arg] = func(arg);
+      return cache[arg];
+    };
   }
 
   invoke(collection, functionOrKey) {
