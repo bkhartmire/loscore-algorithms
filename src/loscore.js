@@ -153,8 +153,26 @@ class LoScore {
   |~~~~~~~~~~~~~
   * */
 
-  sortBy() {
+  sortBy(collection, sorter) {
     // YOUR CODE HERE
+    const result = [];
+    const indexAndProperties = {};
+    for (let i = 0; i < collection.length; i++) {
+      if (typeof collection[i] !== "object") {
+        result.push(sorter(collection[i]));
+      } else {
+        indexAndProperties[i] = collection[i][sorter];
+      }
+    }
+    const sortedProperties = Object.values(indexAndProperties).sort();
+    const indexArr = Object.keys(indexAndProperties);
+    for (const value of sortedProperties) {
+      const index = indexArr.find(
+        (index) => value === indexAndProperties[index]
+      );
+      result.push(collection[index]);
+    }
+    return typeof collection[0] === "object" ? result : result.sort();
   }
 
   zip() {

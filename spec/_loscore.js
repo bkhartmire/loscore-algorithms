@@ -759,22 +759,26 @@ describe("LoScore", () => {
     afterEach(() => {
       releaseSpies();
     });
+
     describe("sortBy", () => {
       it("should not use native methods", () => {
         _.sortBy([3, 2, 1], (num) => num);
         expect(spyReport()).to.be.false;
       });
+
       it("should not mutate the original array", () => {
         const input = [2, 4, 1, 5, 3];
         _.sortBy(input, (num) => num);
         expect(input).to.eql([2, 4, 1, 5, 3]);
       });
+
       it("should sort the collection in ascending order according to the passed in iterator", () => {
         let collection = [2, 4, 1, 5, 3];
         let iteratee = (num) => num;
         let result = _.sortBy(collection, iteratee);
         expect(result).to.eql([1, 2, 3, 4, 5]);
       });
+
       it("should be able to sort the properties of objects", () => {
         const stooges = [
           { name: "curly", age: 60 },
