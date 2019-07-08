@@ -110,6 +110,13 @@ class LoScore {
 
   once(func) {
     // YOUR CODE HERE
+    const result = func();
+    return function() {
+      // if (func) {
+      //   func = null;
+      // }
+      return result;
+    };
   }
 
   memoize(func) {
