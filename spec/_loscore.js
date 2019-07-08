@@ -793,5 +793,32 @@ describe("LoScore", () => {
         expect(_.sortBy(stooges, "age")).to.eql(expected);
       });
     });
+
+    describe("zip", () => {
+      it("should not use native methods", () => {
+        _.sortBy([3, 2, 1], (num) => num);
+        expect(spyReport()).to.be.false;
+      });
+
+      it("should zip arrays together by elements of the same index", () => {
+        const arr1 = [12, 17, 24];
+        const arr2 = ["apple", "pear", "kiwi"];
+        const expected = [[12, "apple"], [17, "pear"], [24, "kiwi"]];
+        expect(_.zip(arr1, arr2)).to.eql(expected);
+      });
+
+      it("should work with more than two arrays", () => {
+        const arr1 = [12, 17, 24];
+        const arr2 = ["apple", "pear", "kiwi"];
+        const arr3 = [false, true, false];
+        const arr4 = ["hola", "konnichiwa", "bonjour"];
+        const expected = [
+          [12, "apple", false, "hola"],
+          [17, "pear", true, "konnichiwa"],
+          [24, "kiwi", false, "bonjour"],
+        ];
+        expect(_.zip(arr1, arr2, arr3, arr4)).to.eql(expected);
+      });
+    });
   });
 });
