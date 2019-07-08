@@ -175,8 +175,17 @@ class LoScore {
     return typeof collection[0] === "object" ? result : result.sort();
   }
 
-  zip() {
+  zip(...collections) {
     // YOUR CODE HREE
+    const result = [];
+    for (let i = 0; i < collections[0].length; i++) {
+      const item = [];
+      for (const collection of collections) {
+        item.push(collection[i]);
+      }
+      result.push(item);
+    }
+    return result;
   }
 
   delay() {
