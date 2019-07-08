@@ -750,4 +750,20 @@ describe("LoScore", () => {
       });
     });
   });
+
+  describe("Advanced Requirements", () => {
+    beforeEach(() => {
+      spyOnNativeMethods();
+    });
+
+    afterEach(() => {
+      releaseSpies();
+    });
+    describe("sortBy", () => {
+      it("should not use native methods", () => {
+        _.sortBy([3, 2, 1], (num) => num);
+        expect(spyReport()).to.be.false;
+      });
+    });
+  });
 });
