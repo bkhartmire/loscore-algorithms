@@ -121,10 +121,7 @@ class LoScore {
     const cache = {};
     return function(arg) {
       const arrayKeys = Object.keys(cache);
-      console.log(arrayKeys);
-      console.log(arrayKeys.includes(arg));
       if (arrayKeys.includes(JSON.stringify(arg))) {
-        console.log("inside if statement");
         return cache[arg];
       }
       cache[arg] = func(arg);
@@ -134,6 +131,21 @@ class LoScore {
 
   invoke(collection, functionOrKey) {
     // YOUR CODE HERE
+    const result = [];
+    for (const item of collection) {
+      let func;
+      if (typeof functionOrKey !== "string") {
+        func = functionOrKey;
+      } else if (Array.isArray(item)) {
+        func = Array.prototype[functionOrKey];
+      } else if (typeof item === "string") {
+        func = String.prototype[functionOrKey];
+      } else if (typeof item === "object") {
+        func = Object.prototype[functionOrKey];
+      }
+      result.push(func.apply(item));
+    }
+    return result;
   }
 
   /**
