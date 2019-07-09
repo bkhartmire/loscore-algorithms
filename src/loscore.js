@@ -201,4 +201,6 @@ class LoScore {
   }
 }
 
+console.log("don't merge me, Mia!");
+
 module.exports = new LoScore();
